@@ -6,9 +6,11 @@ const CBtn = calculator.querySelector(".C-btn");
 const result = calculator.querySelector(".result");
 
 let currVal = 0;
+let currOp = null;
 
 function handleCBtn(){
-
+    currVal = 0;
+    result.innerHTML = 0;
 }
 
 function showCurrVal(){
@@ -16,19 +18,30 @@ function showCurrVal(){
 }
 
 function handleOperator(event){
-    event.target.innerHTML;
+    currOp = event.target.innerHTML;
+    showCurrVal();
 }
 
 function handleNumBtn(event){
-    const currOp = event.target.innerHTML;
-    if(currOp === "+"){
-
-    } else if(currOp === "-"){
-
-    } else if(currOp === "*"){
-
-    } else if(currOp === "/"){
-
+    const currNum = event.target.innerHTML;
+    if(currOp === null){
+        if(currVal !== 0){
+            currVal += currNum;
+        } else {
+            currVal = parseInt(currNum);
+        }
+        showCurrVal();
+    } else {
+        result.innerHTML = currNum;
+        if(currOp === "+"){
+            currVal += parseInt(currNum);
+        } else if(currOp === "-"){
+            currVal -= parseInt(currNum);
+        } else if(currOp === "*"){
+            currVal *= parseInt(currNum);
+        } else if(currOp === "/"){
+            currVal /= parseInt(currNum);
+        }
     }
 }
 
@@ -40,7 +53,7 @@ function init() {
         operator.addEventListener("click", handleOperator);
     }
     CBtn.addEventListener("click", handleCBtn);
-    equalBtn.addEventListener("click", handleEqualBtn);
+    equalBtn.addEventListener("click", showCurrVal);
 }
 
 init();

@@ -25,6 +25,8 @@ body {
   background-color: rgba(70, 70, 70);
   border-radius: 1rem;
   cursor: pointer;
+  height: 70px;
+  line-height: 65px;
 }
 
 .calculator > *:active {
